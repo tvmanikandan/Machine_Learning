@@ -1,6 +1,6 @@
 This data set is from UCI Machine learning repository ( https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data) )
 This dataset classifies people described by a set of attributes as good or bad credit risks.
-The data set has 20 attributes excluding the target out of which 13 are categorical.
+The data set has 20 attributes excluding the target. Out of 20 attributes 13 are categorical.
 
 The variable "target" is created from the variable "good_or_bad" as follows:
     when good_or_bad=1 then target=0 else 1
