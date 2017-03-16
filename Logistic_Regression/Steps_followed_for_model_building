@@ -19,16 +19,16 @@ At each step variable which has high probability value ( not significant ) is re
 
 Finally found the below variables ( predictors ) having less probabiltity value ( more significant ) is found.
 
-status_of_existing_checking_account_encoded
-duration_in_month
-credit_history_encoded
-purpose_encoded
-savings_account_or_bonds_encoded
-present_employment_since_encoded
-installment_rate
-other_debtors_or_gurantors_encoded
-housing_encoded
-foreign_worker_encoded
+    status_of_existing_checking_account_encoded
+    duration_in_month
+    credit_history_encoded
+    purpose_encoded
+    savings_account_or_bonds_encoded
+    present_employment_since_encoded
+    installment_rate
+    other_debtors_or_gurantors_encoded
+    housing_encoded
+    foreign_worker_encoded
 
 Achieved Area under the curve ( ~76% )  & Accuracy ( ~78% )
 
