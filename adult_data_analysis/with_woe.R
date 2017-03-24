@@ -48,19 +48,19 @@ confusionMatrix(y_test,ifelse(lr_1_pred>0.5,1,0)) # Accuracy = 0.8209
 library(e1071)
 model_svm_1 = svm (x_train, factor(y_train), type='C', kernel='linear')
 svm_1_pred=predict(model_svm_1,newdata = x_test)
-table(y_test,svm_1_pred) # Accuracy = ~61.19%
+confusionMatrix(y_test,svm_1_pred) # Accuracy = 0.8246
 
 model_svm_2 = svm (x_train, factor(y_train), type='C', kernel='polynomial', degree=2)
 svm_2_pred = predict (model_svm_2, newdata = x_test)
-table(y_test,svm_2_pred) # Accuracy = ~66.4%
+confusionMatrix(y_test,svm_2_pred) # Accuracy = 0.7799
  
 model_svm_3 = svm (x_train, factor(y_train), type='C', kernel='radial', gamma=0.1)
 svm_3_pred = predict (model_svm_3, newdata=x_test)
-table(y_test,svm_3_pred) # Accuracy = ~62.68%
+confusionMatrix(y_test,svm_3_pred) # Accuracy = 0.8172
 
 model_svm_4 = svm (x_train, factor(y_train), type='C', kernel='radial', gamma=0.1, cost=10,cross = 10)
 svm_4_pred = predict (model_svm_4, newdata=x_test)
-table(y_test,svm_4_pred) # Accuracy = ~81.34%
+confusionMatrix(y_test,svm_4_pred) # Accuracy = 0.8246
 
 library(randomForest)
 help(svm)
@@ -69,11 +69,11 @@ dim(x_train)
 table(y_train)
 model_rf_1=randomForest(x_train,factor(y_train),ntree=500)
 rf_1_pred = predict (model_rf_1, newdata=x_test)
-table(y_test,rf_1_pred) # Accuracy = ~82.46%
+confusionMatrix(y_test,rf_1_pred) # Accuracy = 0.8396
 
 model_rf_2=randomForest(x_train,factor(y_train),ntree=1000)
 rf_2_pred = predict (model_rf_2, newdata=x_test)
-confusionMatrix(y_test,rf_2_pred) # Accuracy = ~82.83%
+confusionMatrix(y_test,rf_2_pred) # Accuracy = 0.8433
 
 varImpPlot(model_rf_2,sort = TRUE)
 
