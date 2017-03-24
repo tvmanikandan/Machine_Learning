@@ -2,6 +2,7 @@ rm(list=ls())
 library(openxlsx)
 library(caret)
 library(e1071)
+library(car)
 
 set.seed(11)
 
@@ -33,23 +34,16 @@ rm(train_data)
 rm(test_data)
 gc()
 
-# logistic regression produces warning : glm.fit: "fitted probabilities numerically 0 or 1 occurred"
-model_lr_1=glm(factor(y_train) ~.,family=binomial(link='logit'),data=x_train)
+
+model_lr_1=glm(factor(y_train) ~.,family=binomial(link='logit'),data=subset(x_train,
+                                                      select=c(age,occupation,education,relationship,capital_gain,hours_per_week,workclass,capital_loss)),maxit = 500)
 summary(model_lr_1)
+vif(model_lr_1)
+lr_1_pred=predict(model_lr_1,newdata = subset(x_test,select=c(age,occupation,education,relationship,capital_gain,hours_per_week,workclass,capital_loss)),type="response")
+#prediction
+confusionMatrix(y_test,ifelse(lr_1_pred>0.5,1,0)) # Accuracy = 0.8209
 
 
-model_lr_2=glm(factor(y_train) ~.,family=binomial(link='logit'),data=subset(x_train,select=-c(education_num)),maxit = 500)
-summary(model_lr_2)
-
-
-model_lr_3=glm(factor(y_train) ~.,family=binomial(link='logit'),data=subset(x_train,select=-c(education_num,race,sex)),maxit = 500)
-summary(model_lr_3)
-
-model_lr_4=glm(factor(y_train) ~.,family=binomial(link='logit'),data=subset(x_train,select=-c(education_num,race,sex,fnlwgt)),maxit = 500)
-summary(model_lr_4)
-
-model_lr_5=glm(factor(y_train) ~.,family=binomial(link='logit'),data=subset(x_train,select=-c(relationship,education_num,race,sex,fnlwgt)),maxit = 500)
-summary(model_lr_5)
 
 library(e1071)
 model_svm_1 = svm (x_train, factor(y_train), type='C', kernel='linear')
@@ -79,7 +73,7 @@ table(y_test,rf_1_pred) # Accuracy = ~82.46%
 
 model_rf_2=randomForest(x_train,factor(y_train),ntree=1000)
 rf_2_pred = predict (model_rf_2, newdata=x_test)
-table(y_test,rf_2_pred) # Accuracy = ~82.83%
+confusionMatrix(y_test,rf_2_pred) # Accuracy = ~82.83%
 
 varImpPlot(model_rf_2,sort = TRUE)
 
