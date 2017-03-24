@@ -1,0 +1,3 @@
+Source of data : https://archive.ics.uci.edu/ml/datasets/adult
+
+Task to perform : Predict whether income exceeds $50K/yr based on census data.
