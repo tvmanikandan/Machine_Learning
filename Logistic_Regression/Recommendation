@@ -1,0 +1,6 @@
+Recommendation
+--------------
+when duration_in_month is more, chances of bad risk becomes 1.52 times higher.
+when installment_rate is higher, chances of bad risk becomes 1.27 times higher.
+
+So based on the customer profile, customized duration_in_month & installment_rate needs to be worked out.

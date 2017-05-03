@@ -1,0 +1,34 @@
+This data set is from UCI Machine learning repository ( https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data) )
+This dataset classifies people described by a set of attributes as good or bad credit risks.
+The data set has 20 attributes excluding the target. Out of 20 attributes 13 are categorical.
+
+The variable "target" is created from the variable "good_or_bad" as follows:
+    when good_or_bad=1 then target=0 else 1
+
+For all categorical variables WOE ( weight of evidence is calcuated ) and WOE of those variables are used. 
+E.g for variable "status_of_existing_checking_account" WOE is calculated and stored in 
+    variable "status_of_existing_checking_account_encoded" and that is used for model building.
+
+Except the target variable all variables are scaled.
+
+Data is partitioned into train & test. Train data has 75% of the observations and test 25%
+
+Step wise Logistic regression model is performed  with binomial family  using all variables.
+
+At each step variable which has high probability value ( not significant ) is removed.
+
+Finally found the below variables ( predictors ) having less probabiltity value ( more significant ) is found.
+
+    status_of_existing_checking_account_encoded
+    duration_in_month
+    credit_history_encoded
+    purpose_encoded
+    savings_account_or_bonds_encoded
+    present_employment_since_encoded
+    installment_rate
+    other_debtors_or_gurantors_encoded
+    housing_encoded
+    foreign_worker_encoded
+
+Achieved Area under the curve ( ~76% )  & Accuracy ( ~78% )
+
